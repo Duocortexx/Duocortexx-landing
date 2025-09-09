@@ -68,7 +68,7 @@
       <div class="row justify-content-between">
         <div class="col-lg-7 pt-5 pt-lg-0 order-2 order-lg-1 d-flex align-items-center">
           <div data-aos="zoom-out">
-            <h1>Every Medico’s Digital Campus <span>DuoCortex</span></h1>
+            <h1>Every Medico’s Digital Campus <br/><span>DuoCortex</span></h1>
             <h2>Learn. Earn. Grow.</h2>
             <h2>Engage with the worldwide community of medical student and professionals.
             </h2>
@@ -119,7 +119,7 @@
 
             <div class="icon-box" data-aos="zoom-in" data-aos-delay="100">
               <div class="icon"><i class="bx bx-bell"></i></div>
-              <h4 class="title"><a href="">Smart, Relevant Notifications</a></h4>
+              <h4 class="title"><a href="announcements.html">Smart, Relevant Notifications</a></h4>
               <p class="description">Get personalized updates – on jobs, exams, recruitments, and events</p>
             </div>
 
@@ -160,7 +160,7 @@
           <div class="col-lg-3 col-md-4">
             <div class="icon-box" data-aos="zoom-in" data-aos-delay="50">
               <i class="ri-notification-line" style="color: #ffbb2c;"></i>
-              <h3><a href="">Personalised Notifications</a></h3>
+              <h3><a href="announcements.html">Personalised Notifications</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
@@ -488,7 +488,7 @@
               <div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Email:</h4>
-                <p>support@duocortex.com</p>
+                <p>support@duocortex.in</p>
               </div>
 
             </div>
@@ -539,11 +539,11 @@
           <div class="col-lg-4 col-md-6">
             <div class="footer-info">
               <h3>DuoCortex</h3>
-              <p class="pb-3"><em>By Medicos For Medicos.</em></p>
+              <p class="pb-3"><em>Learn. Earn. Grow.</em></p>
               <p>
                  <br>
                 India<br><br>
-                <strong>Email:</strong> support@duoCortex.in<br>
+                <strong>Email:</strong> support@duocortex.in<br>
               </p>
               <div class="social-links mt-3">
                 <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
@@ -653,6 +653,21 @@
         }
       }
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const iconBoxes = document.querySelectorAll('.icon-box');
+      iconBoxes.forEach(function(iconBox) {
+        // Skip notification-related icon-boxes that should go to announcements.html
+        const hasNotificationLink = iconBox.querySelector('a[href="announcements.html"]');
+        if (!hasNotificationLink) {
+          iconBox.addEventListener('click', function() {
+            redirectToAppStore();
+          });
+          iconBox.style.cursor = 'pointer';
+        }
+      });
+    });
+
   </script>
 
 </body>
