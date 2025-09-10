@@ -674,18 +674,23 @@
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    const iconBoxes = document.querySelectorAll('.icon-box');
-    iconBoxes.forEach(function(iconBox) {
-      // Skip notification-related icon-boxes that should go to announcements.html
-      const hasNotificationLink = iconBox.querySelector('a[href="announcements.html"]');
-      if (!hasNotificationLink) {
-        iconBox.addEventListener('click', function() {
-          redirectToAppStore();
-        });
-        iconBox.style.cursor = 'pointer';
+  const iconBoxes = document.querySelectorAll('.icon-box');
+  
+  iconBoxes.forEach(function(iconBox) {
+    const hasNotificationLink = iconBox.querySelector('a[href="announcements.html"]');
+    
+    iconBox.addEventListener('click', function(e) {
+      // If click was on the announcements link, do nothing (let <a> handle it)
+      if (hasNotificationLink && hasNotificationLink.contains(e.target)) {
+        return; 
       }
+      redirectToAppStore();
     });
+
+    iconBox.style.cursor = hasNotificationLink ? 'default' : 'pointer';
   });
+});
+
 
   </script>
 
