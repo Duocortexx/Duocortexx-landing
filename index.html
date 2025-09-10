@@ -543,7 +543,7 @@
               <p>
                  <br>
                 India<br><br>
-                <strong>Email:</strong> support@duocortex.in<br>
+                <strong>Email:</strong> support@duoCortex.in<br>
               </p>
               <div class="social-links mt-3">
                 <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
@@ -608,65 +608,84 @@
   <script src="assets/js/main.js"></script>
   <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwvR5uhIiRcud0gyhJbvbK0eqXopwh2JujRsybrPYmHTEqW2m1hYIdlS3pLaBlNe1PDMQ/exec'
-    const form = document.forms['submit-to-google-sheet']
-    const msg = document.getElementById("msg")
-          
-            form.addEventListener('submit', e => {
-              e.preventDefault()
-              fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response =>{
-                    msg.innerHTML="Message Sent Succesfully"
-                    setTimeout(function(){
-                        msg.innerHTML=""
-                    },5000)
-                    form.reset()
-                })
-                .catch(error => console.error('Error!', error.message))
-            })
+   // Use the existing form & msg element (keeps your classes & styling intact)
+  const form = document.forms['submit-to-google-sheet'];
+  const msg = document.getElementById("msg");
 
-    function redirectToAppStore() {
-      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-      
-      // iOS mobile detection
-      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        window.open('https://apps.apple.com/in/app/duocortex/id6749133589', '_blank');
-      }
-      // Android mobile detection
-      else if (/android/i.test(userAgent)) {
-        window.open('https://play.google.com/store/apps/details?id=com.duocortex&pcampaignid=web_share', '_blank');
-      }
-      // macOS desktop detection
-      else if (/Mac|Macintosh/i.test(userAgent)) {
-        window.open('https://apps.apple.com/in/app/duocortex/id6749133589', '_blank');
-      }
-      // Windows desktop detection
-      else if (/Win|Windows/i.test(userAgent)) {
-        window.open('https://play.google.com/store/apps/details?id=com.duocortex&pcampaignid=web_share', '_blank');
-      }
-      // Default fallback for other platforms
-      else {
-        const userChoice = confirm('Choose your platform:\nOK for iOS App Store\nCancel for Google Play Store');
-        if (userChoice) {
-          window.open('https://apps.apple.com/in/app/duocortex/id6749133589', '_blank');
-        } else {
-          window.open('https://play.google.com/store/apps/details?id=com.duocortex&pcampaignid=web_share', '_blank');
-        }
-      }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name = form.querySelector('[name="name"]').value.trim();
+    const email = form.querySelector('[name="email"]').value.trim();
+    const subject = form.querySelector('[name="subject"]').value.trim();
+    const message = form.querySelector('[name="message"]').value.trim();
+
+    // simple validation
+    if (!name || !email || !subject || !message) {
+      msg.innerText = "Please fill all fields.";
+      setTimeout(() => (msg.innerText = ""), 4000);
+      return;
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-      const iconBoxes = document.querySelectorAll('.icon-box');
-      iconBoxes.forEach(function(iconBox) {
-        // Skip notification-related icon-boxes that should go to announcements.html
-        const hasNotificationLink = iconBox.querySelector('a[href="announcements.html"]');
-        if (!hasNotificationLink) {
-          iconBox.addEventListener('click', function() {
-            redirectToAppStore();
-          });
-          iconBox.style.cursor = 'pointer';
-        }
-      });
+    // build mailto body
+    const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+    const mailtoLink = `mailto:support@duocortex.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    // open user's default mail client
+    window.location.href = mailtoLink;
+
+    // give user feedback in page (mail client opened)
+    msg.innerText = "Mail composer opened — please send the message from your mail client.";
+    setTimeout(() => (msg.innerText = ""), 5000);
+
+    // OPTIONAL: if you want to clear the form after opening mail client, uncomment next line
+    // form.reset();
+  });
+
+  // ----- keep your existing helper functions unchanged ----- //
+  function redirectToAppStore() {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      
+    // iOS mobile detection
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      window.open('https://apps.apple.com/in/app/duocortex/id6749133589', '_blank');
+    }
+    // Android mobile detection
+    else if (/android/i.test(userAgent)) {
+      window.open('https://play.google.com/store/apps/details?id=com.duocortex&pcampaignid=web_share', '_blank');
+    }
+    // macOS desktop detection
+    else if (/Mac|Macintosh/i.test(userAgent)) {
+      window.open('https://apps.apple.com/in/app/duocortex/id6749133589', '_blank');
+    }
+    // Windows desktop detection
+    else if (/Win|Windows/i.test(userAgent)) {
+      window.open('https://play.google.com/store/apps/details?id=com.duocortex&pcampaignid=web_share', '_blank');
+    }
+    // Default fallback for other platforms
+    else {
+      const userChoice = confirm('Choose your platform:\nOK for iOS App Store\nCancel for Google Play Store');
+      if (userChoice) {
+        window.open('https://apps.apple.com/in/app/duocortex/id6749133589', '_blank');
+      } else {
+        window.open('https://play.google.com/store/apps/details?id=com.duocortex&pcampaignid=web_share', '_blank');
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const iconBoxes = document.querySelectorAll('.icon-box');
+    iconBoxes.forEach(function(iconBox) {
+      // Skip notification-related icon-boxes that should go to announcements.html
+      const hasNotificationLink = iconBox.querySelector('a[href="announcements.html"]');
+      if (!hasNotificationLink) {
+        iconBox.addEventListener('click', function() {
+          redirectToAppStore();
+        });
+        iconBox.style.cursor = 'pointer';
+      }
     });
+  });
 
   </script>
 
