@@ -1,0 +1,12 @@
+[build]
+  publish = "."
+
+[[edge_functions]]
+  path = "/post/*"
+  function = "og-image"
+
+# Redirects
+[[redirects]]
+  from = "/post/*"
+  to = "/post.html"
+  status = 200

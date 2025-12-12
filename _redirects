@@ -1,1 +1,5 @@
+# Post pages - handled by edge function + post.html
+/post/*  /post.html  200
+
+# All other pages
 /*  /index.html   200
