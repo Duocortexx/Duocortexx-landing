@@ -1,0 +1,16 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "69U6PNUSAQ.com.duocortex",
+                "paths": [
+                    "/post/*",
+                    "/quiz/*",
+                    "/event/*",
+                    "/user/*"
+                ]
+            }
+        ]
+    }
+}
