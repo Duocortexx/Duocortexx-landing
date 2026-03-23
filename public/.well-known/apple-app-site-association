@@ -7,7 +7,9 @@
                 "paths": [
                     "/post/*",
                     "/quiz/*",
+                    "/quiz-room/*",
                     "/event/*",
+                    "/tournament/*",
                     "/user/*",
                     "/announcement/*"
                 ]
