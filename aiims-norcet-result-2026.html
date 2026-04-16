@@ -891,7 +891,7 @@
             <span>Access Study Resources</span>
           </div>
         </div>
-        <a href="index.html" class="btn-download" data-aos="fade-up" data-aos-delay="300" onclick="redirectToAppStore()">
+        <a href="javascript:void(0)" class="btn-download" data-aos="fade-up" data-aos-delay="300" onclick="redirectToAppStore()">
           <i class="bi bi-download"></i> Download DuoCortex Now
         </a>
       </div>
@@ -984,14 +984,22 @@
 
     // App store redirect (same as index.html)
     function redirectToAppStore() {
-      event.preventDefault();
-      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-      if (/android/i.test(userAgent)) {
-        window.location.href = "https://play.google.com/store/apps/details?id=com.duocortex.app";
-      } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        window.location.href = "https://apps.apple.com/app/duocortex";
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        window.open('https://apps.apple.com/in/app/duocortex/id6749133589', '_blank');
+      } else if (/android/i.test(userAgent)) {
+        window.open('https://play.google.com/store/apps/details?id=com.duocortex&pcampaignid=web_share', '_blank');
+      } else if (/Mac|Macintosh/i.test(userAgent)) {
+        window.open('https://apps.apple.com/in/app/duocortex/id6749133589', '_blank');
+      } else if (/Win|Windows/i.test(userAgent)) {
+        window.open('https://play.google.com/store/apps/details?id=com.duocortex&pcampaignid=web_share', '_blank');
       } else {
-        window.location.href = "index.html";
+        var userChoice = confirm('Choose your platform:\nOK for iOS App Store\nCancel for Google Play Store');
+        if (userChoice) {
+          window.open('https://apps.apple.com/in/app/duocortex/id6749133589', '_blank');
+        } else {
+          window.open('https://play.google.com/store/apps/details?id=com.duocortex&pcampaignid=web_share', '_blank');
+        }
       }
     }
   </script>
