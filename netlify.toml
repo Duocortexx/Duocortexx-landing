@@ -10,3 +10,8 @@
   from = "/post/*"
   to = "/post.html"
   status = 200
+
+[[redirects]]
+  from = "/aiims-norcet-result-2026"
+  to = "/aiims-norcet-result-2026.html"
+  status = 200

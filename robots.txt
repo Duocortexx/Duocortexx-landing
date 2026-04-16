@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /netlify/
+Disallow: /.well-known/
+
+Sitemap: https://duocortex.in/sitemap.xml
