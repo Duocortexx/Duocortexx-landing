@@ -81,7 +81,7 @@ export default async (request, context) => {
         <div class="container">
           ${posts.length === 0
             ? `<div class="empty-state"><p>No discussions yet. Check back soon.</p></div>`
-            : `<div class="row" id="forum-list">${cardsHtml}</div>`
+            : `<div class="row g-4" id="forum-list">${cardsHtml}</div>`
           }
 
           ${renderPagination(page, totalPages)}
@@ -210,7 +210,7 @@ function renderShell({ title, description, canonical, prevUrl, nextUrl, activeNa
     .forum-hero h1 { font-family: "Montserrat", sans-serif; font-weight: 700; font-size: 2.5rem; margin-bottom: 12px; }
     .forum-hero p { font-size: 1.1rem; opacity: 0.95; max-width: 720px; margin: 0 auto; }
     .forum-section { padding: 50px 0 80px; }
-    .forum-card { background: #fff; border-radius: 14px; padding: 22px 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid #eef0f3; height: 100%; display: flex; flex-direction: column; margin-bottom: 22px; transition: transform .2s, box-shadow .2s; }
+    .forum-card { background: #fff; border-radius: 14px; padding: 22px 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid #eef0f3; height: 100%; display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s; }
     .forum-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
     .forum-card-meta { display: flex; flex-wrap: wrap; gap: 8px 14px; font-size: 0.85rem; color: #6b6b75; margin-bottom: 8px; align-items: center; }
     .forum-card-author { font-weight: 600; color: #313035; }
