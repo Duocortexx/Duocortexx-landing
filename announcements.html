@@ -121,6 +121,9 @@
       flex-grow: 1;
       display: flex;
       flex-direction: column;
+      min-width: 0;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .announcement-body p {
@@ -129,6 +132,14 @@
       margin-bottom: 20px;
       flex-grow: 1;
       font-size: 1.05rem;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      white-space: pre-line;
+    }
+
+    .announcement-body a {
+      overflow-wrap: anywhere;
+      word-break: break-all;
     }
 
     .announcement-image {
@@ -307,6 +318,7 @@
           <li><a class="nav-link" href="index.html#about">About</a></li>
           <li><a class="nav-link" href="index.html#features">Features</a></li>
           <li><a class="nav-link active" href="announcements.html">Announcements</a></li>
+          <li><a class="nav-link" href="/forum">Forum</a></li>
           <li><a class="nav-link" href="index.html#contact">Contact</a></li>
           <li><a class="nav-link" href="https://accounts.duocortex.in" target="_blank"><span style="display: flex; align-items: center; gap: 5px;"><i class="bi bi-person-circle" style="font-size: large;"></i><span>Login</span></span></a></li>
         </ul>
@@ -474,6 +486,18 @@
         once: true
       });
 
+      // The Netlify edge function (announcements-page.js) pre-renders the cards
+      // server-side. Only fall through to a client-side fetch if the container
+      // is empty (edge function failed or this file was loaded directly).
+      const container = document.getElementById('announcements-container');
+      const alreadyRendered = container && container.querySelector('article, .announcement-card');
+      const loadingState = document.getElementById('loading-state');
+
+      if (alreadyRendered) {
+        if (loadingState) loadingState.classList.add('d-none');
+        return;
+      }
+
       fetchAnnouncements();
     });
 
@@ -545,17 +569,68 @@
         minute: '2-digit'
       });
 
-      card.innerHTML = `
-        <div class="announcement-header">
-          <h3 class="announcement-title">${announcement.title}</h3>
-          <div class="announcement-date">${formattedDate}</div>
-        </div>
-        <div class="announcement-body">
-          <p>${announcement.body}</p>
-          ${announcement.image ? `<div class="announcement-image"><img src="${announcement.image}" alt="Announcement image" class="img-fluid"></div>` : ''}
-          ${announcement.link ? `<div class="announcement-link"><a href="${announcement.link}" target="_blank" class="btn"><i class="bi bi-box-arrow-up-right"></i> Learn More</a></div>` : ''}
-        </div>
-      `;
+      // Only allow http(s) URLs — blocks javascript:, data:, etc.
+      const safeUrl = (raw) => {
+        if (!raw || typeof raw !== 'string') return null;
+        try {
+          const u = new URL(raw, window.location.href);
+          return (u.protocol === 'http:' || u.protocol === 'https:') ? u.href : null;
+        } catch (_) {
+          return null;
+        }
+      };
+
+      const header = document.createElement('div');
+      header.className = 'announcement-header';
+
+      const title = document.createElement('h3');
+      title.className = 'announcement-title';
+      title.textContent = announcement.title || '';
+      header.appendChild(title);
+
+      const date = document.createElement('div');
+      date.className = 'announcement-date';
+      date.textContent = formattedDate;
+      header.appendChild(date);
+
+      const body = document.createElement('div');
+      body.className = 'announcement-body';
+
+      const p = document.createElement('p');
+      p.textContent = announcement.body || '';
+      body.appendChild(p);
+
+      const imageUrl = safeUrl(announcement.image);
+      if (imageUrl) {
+        const imageWrap = document.createElement('div');
+        imageWrap.className = 'announcement-image';
+        const img = document.createElement('img');
+        img.src = imageUrl;
+        img.alt = 'Announcement image';
+        img.className = 'img-fluid';
+        imageWrap.appendChild(img);
+        body.appendChild(imageWrap);
+      }
+
+      const linkUrl = safeUrl(announcement.link);
+      if (linkUrl) {
+        const linkWrap = document.createElement('div');
+        linkWrap.className = 'announcement-link';
+        const a = document.createElement('a');
+        a.href = linkUrl;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.className = 'btn';
+        const icon = document.createElement('i');
+        icon.className = 'bi bi-box-arrow-up-right';
+        a.appendChild(icon);
+        a.appendChild(document.createTextNode(' Learn More'));
+        linkWrap.appendChild(a);
+        body.appendChild(linkWrap);
+      }
+
+      card.appendChild(header);
+      card.appendChild(body);
 
       col.appendChild(card);
       return col;

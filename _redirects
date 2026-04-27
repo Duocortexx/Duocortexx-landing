@@ -1,5 +1,9 @@
-# Post pages - handled by edge function + post.html
+# Post pages - handled by edge function (forum-post.js) + post.html fallback
 /post/*  /post.html  200
+
+# Forum pages - handled by edge function (forum-list.js) + forum.html fallback
+/forum  /forum.html  200
+/forum/*  /forum.html  200
 
 # SEO blog pages
 /aiims-norcet-result-2026  /aiims-norcet-result-2026.html  200

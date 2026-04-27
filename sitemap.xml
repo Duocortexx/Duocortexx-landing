@@ -7,10 +7,16 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://duocortex.in/announcements.html</loc>
-    <lastmod>2026-04-16</lastmod>
+    <loc>https://duocortex.in/announcements</loc>
+    <lastmod>2026-04-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://duocortex.in/forum</loc>
+    <lastmod>2026-04-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://duocortex.in/privacy-policy.html</loc>

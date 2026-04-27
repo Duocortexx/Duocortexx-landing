@@ -4,3 +4,4 @@ Disallow: /netlify/
 Disallow: /.well-known/
 
 Sitemap: https://duocortex.in/sitemap.xml
+Sitemap: https://duocortex.in/sitemap-forum.xml

@@ -1,14 +1,39 @@
 [build]
   publish = "."
 
+# Edge functions
+# Note: each function file in netlify/edge-functions/ also self-declares its
+# `path` config; both this toml entry and the in-file config must match.
+
 [[edge_functions]]
   path = "/post/*"
-  function = "og-image"
+  function = "forum-post"
 
-# Redirects
+[[edge_functions]]
+  path = "/forum"
+  function = "forum-list"
+
+[[edge_functions]]
+  path = "/announcements"
+  function = "announcements-page"
+
+[[edge_functions]]
+  path = "/announcements.html"
+  function = "announcements-page"
+
+[[edge_functions]]
+  path = "/sitemap-forum.xml"
+  function = "sitemap-forum"
+
+# Redirects (fallback if edge function doesn't intercept)
 [[redirects]]
   from = "/post/*"
   to = "/post.html"
+  status = 200
+
+[[redirects]]
+  from = "/forum/*"
+  to = "/forum.html"
   status = 200
 
 [[redirects]]
