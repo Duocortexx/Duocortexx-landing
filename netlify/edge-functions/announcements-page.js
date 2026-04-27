@@ -153,6 +153,12 @@ function renderCard(a) {
 function renderHeader(active) {
   const isActive = (k) => (active === k ? "active" : "");
   return `
+    <style>
+      #header .navbar a, #header .navbar a:focus { color: #4a4658; padding: 10px 0; }
+      #header .navbar a:hover, #header .navbar .active, #header .navbar .active:focus, #header .navbar li:hover > a { color: #6023d2; }
+      #header .navbar > ul > li > a:before { left: 0; background-color: #6023d2; }
+      #header .mobile-nav-toggle { color: #4a4658; }
+    </style>
     <header id="header" class="fixed-top d-flex align-items-center" style="background: rgba(255,255,255,0.96); box-shadow: 0 2px 16px rgba(0,0,0,0.06); height: 72px;">
       <div class="container d-flex align-items-center justify-content-between">
         <a href="/" class="d-flex align-items-center" style="text-decoration: none; gap: 10px;">
