@@ -34,6 +34,10 @@
   <!-- Bootstrap CSS -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File (provides #header, .navbar, .header-transparent, etc.) -->
+  <link href="assets/css/style.css" rel="stylesheet">
 
   <style>
     * {
@@ -48,36 +52,6 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-    }
-
-    /* Header */
-    .header {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 15px 20px;
-      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .header-content {
-      max-width: 600px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .header img {
-      width: 40px;
-      height: 40px;
-    }
-
-    .header h1 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #5e35b1;
-      margin: 0;
     }
 
     /* Main Content */
@@ -333,13 +307,29 @@
 
 <body>
 
-  <!-- Header -->
-  <header class="header">
-    <div class="header-content">
-      <img src="assets/img/logo-1.png" alt="DuoCortex Logo">
-      <h1>DuoCortex</h1>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo" style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+        <img src="assets/img/logo-1.png">
+        <h1><a href="index.html"><span>DuoCortex</span></a></h1>
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link" href="index.html">Home</a></li>
+          <li><a class="nav-link" href="index.html#about">About</a></li>
+          <li><a class="nav-link" href="index.html#features">Features</a></li>
+          <li><a class="nav-link" href="announcements.html">Announcements</a></li>
+          <li><a class="nav-link" href="index.html#contact">Contact</a></li>
+          <li><a class="nav-link" href="https://accounts.duocortex.in" target="_blank"><span style="display: flex; align-items: center; gap: 5px;"><i class="bi bi-person-circle" style="font-size: large;"></i><span>Login</span></span></a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
     </div>
-  </header>
+  </header><!-- End Header -->
 
   <!-- Main Content -->
   <main class="main-content">
@@ -422,6 +412,9 @@
   <footer class="footer">
     <p>&copy; 2024 <a href="https://duocortex.in">DuoCortex</a> - Every Medico's Digital Campus</p>
   </footer>
+
+  <!-- Template Main JS (drives #header scroll behavior + mobile nav toggle) -->
+  <script src="assets/js/main.js"></script>
 
   <script>
     // Get post ID from URL
